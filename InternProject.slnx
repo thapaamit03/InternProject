@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="InternProject.API/InternProject.API.csproj" />
+  <Project Path="InternProject.Domain/InternProject.Domain.csproj" Id="c2e9124a-0427-4661-bb6b-9ef385acf8f8" />
+  <Project Path="InternProject.Infrastructure/InternProject.Infrastructure.csproj" Id="649bd27c-9c32-4abc-99d6-49cb05b13d31" />
+  <Project Path="InterProject.Application/InterProject.Application.csproj" Id="120a082e-5f12-4eef-a439-9f24d336b168" />
 </Solution>
