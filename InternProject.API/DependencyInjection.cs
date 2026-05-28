@@ -1,5 +1,7 @@
-﻿using InternProject.Infrastructure;
+﻿using InternProject.API.Controllers;
+using InternProject.Infrastructure;
 using InterProject.Application;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InternProject.API
 {
@@ -9,6 +11,7 @@ namespace InternProject.API
         {
             services.AddApplicationDI()
                 .AddInfrastructureDI(configuration);
+
             return services;
 
         }
