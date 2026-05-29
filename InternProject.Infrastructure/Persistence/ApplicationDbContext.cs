@@ -16,6 +16,9 @@ using InternProject.Infrastructure.Identity;
             }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -23,6 +26,16 @@ using InternProject.Infrastructure.Identity;
                 .HasOne<ApplicationUser>()
                 .WithMany()
                 .HasForeignKey(x => x.UserId);
+
+            builder.Entity<Product>()
+               .HasOne(x => x.Category)
+               .WithMany(x => x.Products)
+               .HasForeignKey(x => x.CategoryId);
+
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasPrecision(10, 2);
+                
         }
         }
     }

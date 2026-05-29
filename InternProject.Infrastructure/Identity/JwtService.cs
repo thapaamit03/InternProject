@@ -25,6 +25,7 @@ namespace InternProject.Infrastructure.Identity
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
+                expires:DateTime.UtcNow.AddMinutes(10),
                 claims: claims,
                 signingCredentials: creds
                 );

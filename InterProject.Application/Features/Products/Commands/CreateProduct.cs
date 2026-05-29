@@ -1,10 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using InternProject.Application.Common.Interfaces;
+using InternProject.Application.Features.Products.DTOs;
+using MediatR;
 
 namespace InterProject.Application.Features.Products.Commands
 {
-    public class CreateProduct
+    public record CreateProduct(CreateProductDto requestDto) : IRequest<ProductResponseDto>;
+
+    public class CreateProductHandler : IRequestHandler<CreateProduct, ProductResponseDto>
     {
+        private readonly IProductRepo _repo;
+        public CreateProductHandler(IProductRepo repo)
+        {
+            _repo = repo;
+        }
+        public async Task<ProductResponseDto> Handle(CreateProduct request, CancellationToken cancellationToken)
+        {
+          return  await _repo.CreateProductAsync(request.requestDto);
+        }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using InternProject.Application.Common.Interfaces;
 using InternProject.Infrastructure.Data;
 using InternProject.Infrastructure.Identity;
+using InternProject.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace InternProject.Infrastructure
@@ -35,12 +37,12 @@ namespace InternProject.Infrastructure
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"])
-                        )
+                        ),
+                    RoleClaimType =ClaimTypes.Role
                 };
             });
             services.AddAuthorization();
@@ -54,6 +56,8 @@ namespace InternProject.Infrastructure
             
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJwtService,JwtService>();
+            services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped<ICategoryRepo, CategoryRepo>();
             return services;
         }
     }

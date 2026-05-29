@@ -20,6 +20,7 @@
     <Folder Include="Common\Exception\" />
     <Folder Include="Common\Behaviors\" />
     <Folder Include="Features\Auth\Queries\" />
+    <Folder Include="Features\Categories\Queries\" />
     <Folder Include="Features\Orders\Commands\" />
     <Folder Include="Features\Orders\Handler\" />
     <Folder Include="Features\Orders\Queries\" />

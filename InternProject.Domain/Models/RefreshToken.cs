@@ -15,6 +15,6 @@ namespace InternProject.Domain.Models
 
         public string UserId { get; set; } = string.Empty;
 
-
+      
     }
 }
