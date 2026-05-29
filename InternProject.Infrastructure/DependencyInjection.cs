@@ -58,6 +58,7 @@ namespace InternProject.Infrastructure
             services.AddScoped<IJwtService,JwtService>();
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<ICartRepo, CartRepo>();
             return services;
         }
     }

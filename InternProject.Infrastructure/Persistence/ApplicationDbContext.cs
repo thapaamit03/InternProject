@@ -19,6 +19,11 @@ using InternProject.Infrastructure.Identity;
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -35,7 +40,11 @@ using InternProject.Infrastructure.Identity;
             builder.Entity<Product>()
                 .Property(p => p.Price)
                 .HasPrecision(10, 2);
-                
+
+            builder.Entity<Cart>()
+                .HasMany(c => c.CartItems)
+                .WithOne(ci => ci.Cart)
+                .HasForeignKey(ci => ci.CartId);
         }
         }
     }
