@@ -10,7 +10,7 @@ namespace InternProject.Application.Common.Interfaces
     {
         Task<string> AddToCart(string userId, AddToCartDto dto);
 
-        //Task<Cart> GetCart();
+           Task<CartResponseDto> GetCartItems(string userId);
 
         //Task RemoveCartItem(int cartItemId);
     }
