@@ -48,5 +48,30 @@ namespace InternProject.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
                 return "Item added to cart ";
             }
+
+        public async Task<CartResponseDto> GetCartItems(string userId)
+        {
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if(cart is null)
+            {
+                return null;
+            }
+
+            return new CartResponseDto
+            {
+                CartId = cart.Id,
+                Items = cart.CartItems.Select(ci => new CartItemResponseDto
+                {
+                    ProductId = ci.ProductId,
+                    ProductName = ci.Product.Name,
+                    Price = ci.Product.Price,
+                    Quantity = ci.Quantity
+                }).ToList()
+            };
+        }
     }
 }

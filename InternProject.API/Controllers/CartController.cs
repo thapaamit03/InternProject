@@ -1,5 +1,6 @@
 ﻿using InternProject.Application.Features.Cart.Commands;
 using InternProject.Application.Features.Cart.DTOs;
+using InternProject.Application.Features.Cart.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,21 @@ namespace InternProject.API.Controllers
             {
                 message = result
             });
+        }
+
+        [HttpGet]
+        [Authorize(Roles ="Customer")]
+
+        public async Task<IActionResult> GetCartItems()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var result = await _mediator.Send(new GetCartItems(userId));
+            if(result is null)
+            {
+                return NotFound("your cart is empty");
+            }
+            return Ok(result);
         }
     }
 }
