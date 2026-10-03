@@ -24,6 +24,8 @@ using InternProject.Infrastructure.Identity;
 
         public DbSet<CartItem> CartItems { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -45,6 +47,14 @@ using InternProject.Infrastructure.Identity;
                 .HasMany(c => c.CartItems)
                 .WithOne(ci => ci.Cart)
                 .HasForeignKey(ci => ci.CartId);
+
+            builder.Entity<Order>()
+                .Property(o => o.TotalAmount)
+                .HasPrecision(10, 2);
+
+            builder.Entity<OrderItem>()
+                .Property(oi => oi.Price)
+                .HasPrecision(10, 2);
         }
         }
     }
