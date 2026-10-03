@@ -73,5 +73,23 @@ namespace InternProject.Infrastructure.Repositories
                 }).ToList()
             };
         }
+
+        public async Task<string> RemoveFromCart(string userId, int cartItemId, int quantity)
+        {
+            if (quantity <= 0)
+                throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be greater than zero.");
+
+            var cartItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.Id == cartItemId && ci.Cart.UserId == userId)
+                ?? throw new Exception($"Cart item {cartItemId} was not found.");
+
+            if (quantity >= cartItem.Quantity)
+                _context.CartItems.Remove(cartItem);
+            else
+                cartItem.Quantity -= quantity;
+
+            await _context.SaveChangesAsync();
+            return "Item removed from cart.";
+        }
     }
 }

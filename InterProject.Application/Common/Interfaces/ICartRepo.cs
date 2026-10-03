@@ -12,6 +12,8 @@ namespace InternProject.Application.Common.Interfaces
 
            Task<CartResponseDto> GetCartItems(string userId);
 
+        Task<string> RemoveFromCart(string userId, int cartItemId, int quantity);
+
         //Task RemoveCartItem(int cartItemId);
     }
 }

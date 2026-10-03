@@ -40,6 +40,21 @@ namespace InternProject.API.Controllers
 
             return Ok(result);
         }
-        
+
+        [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] CreateProductDto request)
+        {
+            var result = await _mediator.Send(new UpdateProduct(id, request));
+            return Ok(result);
+        }
+
+        [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var result = await _mediator.Send(new DeleteProduct(id));
+            return Ok(result);
+        }
     }
 }

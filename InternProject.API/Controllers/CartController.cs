@@ -45,5 +45,18 @@ namespace InternProject.API.Controllers
             }
             return Ok(result);
         }
+
+        [HttpDelete]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> RemoveFromCart([FromQuery] int cartItemId, [FromQuery] int quantity)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var result = await _mediator.Send(new RemoveFromCart( cartItemId, quantity,userId));
+            return Ok(new
+            {
+                message = result
+            });
+        }
     }
 }

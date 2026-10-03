@@ -10,5 +10,9 @@ namespace InternProject.Application.Common.Interfaces
         Task<ProductResponseDto> CreateProductAsync(CreateProductDto request);
 
         Task< List< ProductResponseDto>> GetProductsAsync();
+
+        Task<ProductResponseDto> DeleteProductAsync(int id);
+
+        Task<ProductResponseDto> UpdateProductAsync(int id, CreateProductDto request);
     }
 }
