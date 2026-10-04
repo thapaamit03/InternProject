@@ -52,9 +52,18 @@ using InternProject.Infrastructure.Identity;
                 .Property(o => o.TotalAmount)
                 .HasPrecision(10, 2);
 
-            builder.Entity<OrderItem>()
-                .Property(oi => oi.Price)
+            builder.Entity<Order>()
+                .Property(o => o.DiscountAmount)
                 .HasPrecision(10, 2);
+
+            builder.Entity<OrderItem>()
+                .Property(oi => oi.UnitPrice)
+                .HasPrecision(10, 2);
+
+            builder.Entity<OrderItem>()
+                .Property(oi => oi.TotalPrice)
+                .HasPrecision(10, 2);
+
         }
         }
     }
